@@ -184,11 +184,13 @@ const MapPage = () => {
                   id={type.id}
                   checked={selectedTypes.includes(type.id)}
                   onCheckedChange={(checked) => {
-                    if (checked) {
-                      setSelectedTypes([...selectedTypes, type.id]);
-                    } else {
-                      setSelectedTypes(selectedTypes.filter(t => t !== type.id));
-                    }
+                    const isChecked = checked === true;
+                    setSelectedTypes((prev) => {
+                      if (isChecked) {
+                        return prev.includes(type.id) ? prev : [...prev, type.id];
+                      }
+                      return prev.filter((t) => t !== type.id);
+                    });
                   }}
                 />
                 <div className="flex items-center space-x-2 flex-1">
